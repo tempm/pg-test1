@@ -35,8 +35,12 @@ var app = {
     onDeviceReady: function() {
         console.log($("#btn").length);
         $("#btn").on('touchstart',function(){
-            console.log('test');
-            $('#console').append('test\n')
+            console.log('touchstart');
+            $('#console').append('touchstart\n')
+        });
+        $("#btn").on('click',function(){
+            console.log('click');
+            $('#console').append('click\n')
         });
 
         app.receivedEvent('deviceready');
