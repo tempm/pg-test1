@@ -33,6 +33,11 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        console.log($("#btn").length);
+        $("#btn").on('touchstart',function(){
+            console.log('test');
+            $('#console').append('test\n')
+        });
 
         app.receivedEvent('deviceready');
     },
@@ -46,10 +51,5 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-
-        $("#btn").on('touchstart',function(){
-            console.log('test');
-            $('#console').append('test\n')
-        });
     }
 };
