@@ -1,5 +1,12 @@
 .twitter-typeahead {
-    width: 100%;
+    width: 100% !important;
+}
+
+input.tt-query{
+    background-color: #fff !important;
+}
+input.tt-hint{
+    visibility: hidden;
 }
 
 .twitter-typeahead .tt-query,
@@ -50,7 +57,4 @@
 
 .tt-suggestion p {
     margin: 0;
-}
-input.tt-query{
-    background-color: #fff !important;
 }
