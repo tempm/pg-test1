@@ -42,9 +42,9 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="dbm.html">dbm</a></li>
-                <li><a href="acc.html">Acc</a></li>
+                <li class="active"><a href="acc.html">Acc</a></li>
             </ul>
         </div>
     </div>
@@ -52,19 +52,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <form id="console-form">
-                <div class="input-group">
-                    <input type="text" class="form-control typeahead" name="command" placeholder="command" id="command">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" id="run">run</button>
-                    </span>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <pre id="console"></pre>
+            <div>x:<code data-x></code></div>
+            <div>y:<code data-y></code></div>
+            <div>z:<code data-z></code></div>
+            <div>e:<code data-e></code></div>
+            <div>---- watch ---</div>
+            <div>x:<code data-wx></code></div>
+            <div>y:<code data-wy></code></div>
+            <div>z:<code data-wz></code></div>
+            <div>t:<code data-wt></code></div>
+            <div>e:<code data-we></code></div>
         </div>
     </div>
 </div>
@@ -75,9 +72,26 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/typeahead.min.js"></script>
 <script src="js/string.min.js"></script>
-<script src="js/index.js"></script>
 <script>
-    app.initialize();
+    document.addEventListener('deviceready', function () {
+        setInterval(function () {
+            navigator.accelerometer.getCurrentAcceleration(function (acceleration) {
+                $('[data-x]').text(acceleration.x);
+                $('[data-y]').text(acceleration.y);
+                $('[data-z]').text(acceleration.z);
+            }, function () {
+                $('[data-e]').append('.');
+            });
+        }, 1000);
+        navigator.accelerometer.watchAcceleration(function (acceleration) {
+            $('[data-wx]').text(acceleration.x);
+            $('[data-wy]').text(acceleration.y);
+            $('[data-wz]').text(acceleration.z);
+            $('[data-wt]').text(acceleration.timestamp);
+        }, function () {
+            $('[data-we]').append('.');
+        }, { frequency:1000 });
+    }, false);
 </script>
 </body>
 </html>
